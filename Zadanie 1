@@ -1,0 +1,102 @@
+[GameManager]
+public class CrossCalculator : MonoBehaviour
+{
+    void Start()
+    {
+        Vector3 v = new Vector3(1f, 2f, 3f);
+        Vector3 w = new Vector3(4f, 5f, 6f);
+        Vector3 result = CrossProduct(v, w);
+        Debug.Log("Result Ratio Vector: " + result);
+    }
+
+    public Vector3 CrossProduct(Vector3 v, Vector3 w)
+    {
+        float x = v.y * w.z - v.z * w.y;
+        float y = v.z * w.x - v.x * w.z;
+        float z = v.x * w.y - v.y * w.x;
+
+        return new Vector3(x, y, z);
+    }  
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+[GameManager]
+public class DistanceBetweenPlayerAndGameObject : MonoBehaviour
+{
+   public Transform player;
+   public Transform point;
+
+    void Update()
+    {
+        float distance = Vector3.Distance(player.position, point.position);    
+        Debug.Log(distance);
+    }
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+[GameManager]
+public class DotCalculator : MonoBehaviour
+{
+    private void Start()
+    {
+        Vector2 v = new Vector2(3f,4f);
+        Vector2 w = new Vector2(5f, 6f);
+        float result = DotProduct(v,w);
+        Debug.Log("Dot Calc: " + result);
+    }
+
+    public float DotProduct(Vector2 v, Vector2 w)
+    {
+        float dotProduct = v.x * w.x + v.y * w.y;
+        return dotProduct;  
+    }
+}
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+[Enemy]
+public class MoveToTarget : MonoBehaviour
+{
+    public Transform target;
+
+    public float speed = 4f;
+    void Update()
+    {
+        if (target != null)
+        {
+            Vector3 direction = target.position - transform.position;   
+            direction.Normalize();
+            transform.Translate(direction *speed * Time.deltaTime);
+        }
+    }
+}
+
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+[Player]
+public class PlayerController : MonoBehaviour
+{
+    public CharacterController characterController;
+
+    private float movementSpeed = 3f;
+
+    private float horizontal;
+    private float vertical;
+
+    private float currentHeigh;
+
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();  
+    }
+    void Update()
+    {
+        Movement();
+    }
+
+    public void Movement()
+    {
+        horizontal = Input.GetAxis("Horizontal") * movementSpeed;
+        vertical = Input.GetAxis("Vertical") * movementSpeed;
+        
+        Vector3 move = new Vector3(horizontal, currentHeigh, vertical);
+        characterController.Move(move * Time.deltaTime);
+    }
+}
