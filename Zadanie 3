@@ -1,3 +1,4 @@
+public class MakePoint : MonoBehaviour
 {
     public int [] countH;
     public int[] countW;
@@ -37,16 +38,10 @@
     }
 }
 
----------------------------------------------------------------------------------------------------
-
-using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+[GameManager]
 public class MazeGenerator : MonoBehaviour
 {
-    
-
     public int width, height;
     public Material brick;
     private int[,] Maze;
